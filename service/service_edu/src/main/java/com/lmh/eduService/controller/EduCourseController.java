@@ -61,6 +61,7 @@ public class EduCourseController {
         courseService.updateById(eduCourse);
         return R.ok();
     }
+
     @ApiOperation("课程列表查询")
     @PostMapping("findAll/{current}/{limit}")
     public R findAll(@PathVariable(name = "current")long current,

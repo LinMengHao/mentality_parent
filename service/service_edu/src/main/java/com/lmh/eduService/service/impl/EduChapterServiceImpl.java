@@ -31,6 +31,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     @Autowired
     private EduVideoService videoService;
 
+
     @Override
     public List<ChapterVo> getChapterVideoByCourseId(String courseId) {
         QueryWrapper<EduChapter>wrapper=new QueryWrapper<>();

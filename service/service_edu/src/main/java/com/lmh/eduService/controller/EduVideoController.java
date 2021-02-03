@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author lmh
  * @since 2021-01-26
  */
+
 @Api(tags = "课程小结视频")
 @CrossOrigin
 @RestController
