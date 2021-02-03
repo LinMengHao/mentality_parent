@@ -6,4 +6,7 @@ import lombok.Data;
 public class CourseQuery {
     private String title;
     private String status;
+    private String psychologistId;
+    private String subjectId;
+    private String subjectParentId;
 }

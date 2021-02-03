@@ -9,6 +9,7 @@ import com.lmh.eduService.service.EduCourseService;
 import com.lmh.eduService.entity.vo.CourseInfoVo;
 import com.lmh.eduService.entity.vo.CourseQuery;
 import com.lmh.utils.R;
+import com.sun.xml.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,12 +68,24 @@ public class EduCourseController {
                      @RequestBody(required = false)CourseQuery courseQuery){
         String status = courseQuery.getStatus();
         String title = courseQuery.getTitle();
+        String psychologistId = courseQuery.getPsychologistId();
+        String subjectId = courseQuery.getSubjectId();
+        String subjectParentId = courseQuery.getSubjectParentId();
         QueryWrapper<EduCourse>wrapper=new QueryWrapper<>();
         if(!StringUtils.isEmpty(status)){
             wrapper.eq("status",status);
         }
         if(!StringUtils.isEmpty(title)){
             wrapper.like("title",title);
+        }
+        if(!StringUtils.isEmpty(psychologistId)){
+            wrapper.eq("psychologist_id",psychologistId);
+        }
+        if(!StringUtils.isEmpty(subjectId)){
+            wrapper.eq("subject_id",subjectId);
+        }
+        if(!StringUtils.isEmpty(subjectParentId)){
+            wrapper.eq("subject_parent_id",subjectParentId);
         }
         wrapper.orderByDesc("gmt_create");
         Page<EduCourse> page=new Page<>(current,limit);
@@ -86,6 +99,12 @@ public class EduCourseController {
     public R getCoursePublishInfo(@PathVariable String id){
         CoursePublishVo coursePublishVo=courseService.getCoursePublishInfo(id);
         return R.ok().data("publishCourse",coursePublishVo);
+    }
+    //TODO
+    @ApiOperation("删除课程")
+    @DeleteMapping("deleteCourse/{id}")
+    public R deleteCourse(@PathVariable String id){
+        return R.ok();
     }
 }
 
