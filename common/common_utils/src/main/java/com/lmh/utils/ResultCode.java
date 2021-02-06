@@ -45,14 +45,21 @@ public enum ResultCode implements IResultCode {
     /*运行时异常*/
     ARITHMETIC_EXCEPTION(9001,"算数异常"),
     SAVE_ERROR(9002,"保存失败"),
+    START_TIMEOUT(9003,"连接超时"),
 
     /*文件错误*/
     FILE_EMPTY(4001,"文件数据为空"),
     /*课程信息错误*/
     COURSE_NOT_SAVE(5001,"课程信息添加失败"),
     COURSE_NOT_UPDATE(5002,"课程信息修改失败"),
+    COURSE_NOT_DELETE(5003,"课程删除失败"),
     /*章节错误*/
     CHAPTER_NOT_DELETE(6001,"章节删除失败，请先删除小节"),
+
+    /*视频错误*/
+    VIDEO_NOT_UPLOAD(7001,"视频失效"),
+    VIDEO_NOT_DELETE(7002,"视频删除失败"),
+    VIDEO_NOT_GET(7003,"获取视频凭证失败"),
     ;
 
     private Integer code;

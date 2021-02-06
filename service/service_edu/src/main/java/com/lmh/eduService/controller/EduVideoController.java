@@ -1,12 +1,15 @@
 package com.lmh.eduService.controller;
 
 
+import com.lmh.base.handler.LmhException;
+import com.lmh.eduService.client.VodClient;
 import com.lmh.eduService.entity.EduVideo;
 import com.lmh.eduService.service.EduVideoService;
 import com.lmh.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +29,8 @@ public class EduVideoController {
 
     @Autowired
     private EduVideoService videoService;
+    @Autowired
+    private VodClient vodClient;
 
     @ApiOperation("添加小节")
     @PostMapping("addVideo")
@@ -36,7 +41,17 @@ public class EduVideoController {
     @ApiOperation("删除小节")
     @DeleteMapping("deleteVideo/{id}")
     public R deleteVideo(@PathVariable String id){
-        videoService.removeById(id);
+        EduVideo eduVideo = videoService.getById(id);
+        String videoSourceId=eduVideo.getVideoSourceId();
+        //判断是否有视频
+        if(!StringUtils.isEmpty(videoSourceId)){
+            //微服务，nacos服务注册，该方法调用，删除阿里云视频
+            R r = vodClient.deleteAlyVideo(videoSourceId);
+            if(r.getCode()==7002){
+                throw new LmhException(7002,"删除视频失败，服务器熔断");
+            }
+        }
+        boolean b = videoService.removeById(id);
         return R.ok();
     }
     @ApiOperation("根据ID查询小节")
@@ -51,5 +66,6 @@ public class EduVideoController {
         videoService.updateById(eduVideo);
         return R.ok();
     }
+
 }
 

@@ -1,18 +1,28 @@
 package com.lmh.eduService.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lmh.base.handler.LmhException;
+import com.lmh.eduService.client.VodClient;
+import com.lmh.eduService.entity.EduChapter;
 import com.lmh.eduService.entity.EduCourse;
 import com.lmh.eduService.entity.EduCourseDescription;
+import com.lmh.eduService.entity.EduVideo;
 import com.lmh.eduService.entity.vo.CoursePublishVo;
 import com.lmh.eduService.mapper.EduCourseMapper;
+import com.lmh.eduService.service.EduChapterService;
 import com.lmh.eduService.service.EduCourseDescriptionService;
 import com.lmh.eduService.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lmh.eduService.entity.vo.CourseInfoVo;
+import com.lmh.eduService.service.EduVideoService;
 import com.lmh.utils.ResultCode;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -26,7 +36,12 @@ import org.springframework.stereotype.Service;
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
     @Autowired
     private EduCourseDescriptionService courseDescriptionService;
-
+    @Autowired
+    private EduVideoService videoService;
+    @Autowired
+    private EduChapterService chapterService;
+    @Autowired
+    private VodClient vodClient;
     @Override
     public String addCourseInfo(CourseInfoVo courseInfoVo) {
         //添加课程基本信息
@@ -78,5 +93,39 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     public CoursePublishVo getCoursePublishInfo(String id) {
         CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
         return publishCourseInfo;
+    }
+
+    @Override
+    public void deleteCourse(String id) {
+        //删除小节里上传到阿里云的视频
+        //先删除小节
+        QueryWrapper<EduVideo> wrapper =new QueryWrapper<>();
+        wrapper.eq("course_id",id);
+        List<EduVideo> eduVideoList = videoService.list(wrapper);
+        List<String> videoIdList=new ArrayList<>();
+        for (EduVideo eduVideo : eduVideoList) {
+            String videoId=eduVideo.getVideoSourceId();
+            if(!StringUtils.isEmpty(videoId)){
+                videoIdList.add(videoId);
+            }
+        }
+        if(videoIdList.size()>0) {
+            vodClient.deleteAlyVideoList(videoIdList);
+        }
+        boolean remove = videoService.remove(wrapper);
+
+        //再删除章节
+        QueryWrapper<EduChapter> wrapper1 =new QueryWrapper<>();
+        wrapper1.eq("course_id",id);
+        boolean remove1 = chapterService.remove(wrapper1);
+
+        //删除课程描述
+        boolean b = courseDescriptionService.removeById(id);
+
+        //最后删课程
+        int i = baseMapper.deleteById(id);
+        if(i==0){
+            throw new LmhException(ResultCode.COURSE_NOT_DELETE.getCode(),ResultCode.COURSE_NOT_DELETE.getMessage());
+        }
     }
 }

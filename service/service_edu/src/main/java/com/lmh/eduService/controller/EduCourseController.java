@@ -101,10 +101,11 @@ public class EduCourseController {
         CoursePublishVo coursePublishVo=courseService.getCoursePublishInfo(id);
         return R.ok().data("publishCourse",coursePublishVo);
     }
-    //TODO
+
     @ApiOperation("删除课程")
     @DeleteMapping("deleteCourse/{id}")
     public R deleteCourse(@PathVariable String id){
+        courseService.deleteCourse(id);
         return R.ok();
     }
 }

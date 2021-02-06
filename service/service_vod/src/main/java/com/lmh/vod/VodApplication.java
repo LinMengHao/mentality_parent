@@ -1,20 +1,17 @@
-package com.lmh.eduService;
+package com.lmh.vod;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
+
 @EnableFeignClients//服务调用
 @EnableDiscoveryClient//nacos注册
-@SpringBootApplication
-@MapperScan(basePackages = "com.lmh.eduService.mapper")
-@ComponentScan(basePackages = "com.lmh")
-
-public class EduApplication {
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class,scanBasePackages = {"com.lmh"})
+public class VodApplication {
   public static void main(String[] args) {
     //
-      SpringApplication.run(EduApplication.class,args);
+      SpringApplication.run(VodApplication.class,args);
   }
 }
