@@ -28,15 +28,9 @@ public class IndexFrontController {
     @ApiOperation("查询前八条热门课程,前四名师")
     @GetMapping("index")
     public R index(){
-        QueryWrapper<EduCourse> wrapper=new QueryWrapper<>();
-        wrapper.orderByDesc("id");
-        wrapper.last("limit 8");
-        List<EduCourse> list = courseService.list(wrapper);
+        List<EduCourse> list = courseService.list1();
 
-        QueryWrapper<EduPsychologist>wrapper1=new QueryWrapper<>();
-        wrapper1.orderByDesc("id");
-        wrapper1.last("limit 4");
-        List<EduPsychologist> list1 = psychologistService.list(wrapper1);
+        List<EduPsychologist> list1 = psychologistService.list2();
 
         return R.ok().data("eduList",list).data("teacherList",list1);
     }

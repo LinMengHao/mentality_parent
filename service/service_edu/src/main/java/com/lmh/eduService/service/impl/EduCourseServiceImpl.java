@@ -18,6 +18,7 @@ import com.lmh.eduService.service.EduVideoService;
 import com.lmh.utils.ResultCode;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -127,5 +128,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if(i==0){
             throw new LmhException(ResultCode.COURSE_NOT_DELETE.getCode(),ResultCode.COURSE_NOT_DELETE.getMessage());
         }
+    }
+    @Cacheable(key = "'courseList'",value = "course")
+    @Override
+    public List<EduCourse> list1() {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("id");
+        wrapper.last("limit 8");
+        List<EduCourse> eduCourses = baseMapper.selectList(wrapper);
+        return eduCourses;
     }
 }

@@ -15,7 +15,7 @@ public class JwtUtils {
   public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; // 秘钥加密操作
 
   // 生成token字符串的方法
-  public static String getJwtToken(Long id, String nickname) {
+  public static String getJwtToken(String id, String nickname) {
 
     String JwtToken =
         Jwts.builder()
@@ -80,12 +80,11 @@ public class JwtUtils {
    * @param request
    * @return
    */
-  public static Integer getMemberIdByJwtToken(HttpServletRequest request) {
-    String jwtToken = request.getHeader("X-Token");
-    System.out.println(request.getHeader("X-Token"));
-    if (StringUtils.isEmpty(jwtToken)) return 0;
-    Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);
-    Claims claims = claimsJws.getBody();
-    return (Integer) claims.get("id");
+  public static String getMemberIdByJwtToken(HttpServletRequest request) {
+      String jwtToken = request.getHeader("token");
+      if (StringUtils.isEmpty(jwtToken)) return "";
+      Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);
+      Claims claims = claimsJws.getBody();
+      return (String) claims.get("id");
   }
 }

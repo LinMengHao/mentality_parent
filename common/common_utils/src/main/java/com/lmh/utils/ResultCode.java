@@ -33,7 +33,8 @@ public enum ResultCode implements IResultCode {
     USER_ACCOUNT_NOT_EXIST(2007, "账号不存在"),
     USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
-
+    /*微信登录*/
+    WX_ERROR(2010,"微信授权失败"),
     /*错误*/
     DORMITORY_NOT_DELETE(3007, "有入住人，不可删除，请先移除住户"),
     DORMITORY_ALREADY_EXIST(3008, "宿舍房间名已存在"),
@@ -41,7 +42,8 @@ public enum ResultCode implements IResultCode {
 
     /* 业务错误 */
     NO_PERMISSION(3001, "没有权限"),
-
+    /*验证码*/
+    CODE_ERROR(4001,"验证码错误"),
     /*运行时异常*/
     ARITHMETIC_EXCEPTION(9001,"算数异常"),
     SAVE_ERROR(9002,"保存失败"),

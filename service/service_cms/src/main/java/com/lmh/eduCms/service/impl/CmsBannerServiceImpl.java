@@ -5,6 +5,7 @@ import com.lmh.eduCms.entity.CmsBanner;
 import com.lmh.eduCms.mapper.CmsBannerMapper;
 import com.lmh.eduCms.service.CmsBannerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Service
 public class CmsBannerServiceImpl extends ServiceImpl<CmsBannerMapper, CmsBanner> implements CmsBannerService {
-
+    @Cacheable(key = "'selectIndexList'", value = "banner")
     @Override
     public List<CmsBanner> selectAllBanner() {
         // 根据id进行降序，并显示排列之后的几条
