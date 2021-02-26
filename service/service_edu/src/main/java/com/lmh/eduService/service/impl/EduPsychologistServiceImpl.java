@@ -1,6 +1,7 @@
 package com.lmh.eduService.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lmh.eduService.entity.EduPsychologist;
 import com.lmh.eduService.mapper.EduPsychologistMapper;
 import com.lmh.eduService.service.EduPsychologistService;
@@ -8,7 +9,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,4 +32,33 @@ public class EduPsychologistServiceImpl extends ServiceImpl<EduPsychologistMappe
         List<EduPsychologist> EduPsychologist = baseMapper.selectList(wrapper1);
         return EduPsychologist;
     }
+
+    @Override
+    public Map<String, Object> getPsychologistFrontList(Page<EduPsychologist> psychologistPage) {
+        QueryWrapper<EduPsychologist> wrapper=new QueryWrapper<>();
+        wrapper.orderByDesc("sort");
+        baseMapper.selectPage(psychologistPage,wrapper);
+        List<EduPsychologist> records = psychologistPage.getRecords();
+        long current = psychologistPage.getCurrent();
+        long pages = psychologistPage.getPages();
+        long size = psychologistPage.getSize();
+        long total = psychologistPage.getTotal();
+        boolean hasNext = psychologistPage.hasNext();//下一页
+        boolean hasPrevious = psychologistPage.hasPrevious();//上一页
+
+        //把分页数据获取出来，放到map集合
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+
+        //map返回
+        return map;
+    }
+
+
 }
