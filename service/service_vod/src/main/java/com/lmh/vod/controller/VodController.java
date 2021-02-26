@@ -49,6 +49,7 @@ public class VodController {
     }
 
     @ApiOperation("根据视频id获取视频凭证")
+
     @GetMapping("getPlayAuth/{id}")
     public R getPlayAuth(@PathVariable String id){
         try{
