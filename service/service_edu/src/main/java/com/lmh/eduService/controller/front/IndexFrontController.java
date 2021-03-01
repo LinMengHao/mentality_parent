@@ -1,6 +1,5 @@
 package com.lmh.eduService.controller.front;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lmh.eduService.entity.EduCourse;
 import com.lmh.eduService.entity.EduPsychologist;
 import com.lmh.eduService.service.EduCourseService;

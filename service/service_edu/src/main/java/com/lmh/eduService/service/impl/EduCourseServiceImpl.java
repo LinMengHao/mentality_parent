@@ -191,6 +191,17 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Override
     public CourseWebVo getBaseCourseInfo(String courseId) {
+        EduCourse course = baseMapper.selectById(courseId);
+        //更新浏览数
+        course.setViewCount(course.getViewCount() + 1);
+        baseMapper.updateById(course);
         return baseMapper.getBaseCourseInfo(courseId);
+    }
+
+    @Override
+    public void updateBuyCountById(String id) {
+        EduCourse course = baseMapper.selectById(id);
+        course.setBuyCount(course.getBuyCount() + 1);
+        this.updateById(course);
     }
 }

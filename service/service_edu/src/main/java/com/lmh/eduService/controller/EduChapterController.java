@@ -4,7 +4,6 @@ package com.lmh.eduService.controller;
 import com.lmh.eduService.entity.EduChapter;
 import com.lmh.eduService.entity.chapter.ChapterVo;
 import com.lmh.eduService.service.EduChapterService;
-import com.lmh.eduService.service.EduVideoService;
 import com.lmh.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

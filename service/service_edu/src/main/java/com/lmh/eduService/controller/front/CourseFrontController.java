@@ -8,12 +8,12 @@ import com.lmh.eduService.entity.frontvo.CourseFrontVo;
 import com.lmh.eduService.entity.frontvo.CourseWebVo;
 import com.lmh.eduService.service.EduChapterService;
 import com.lmh.eduService.service.EduCourseService;
+import com.lmh.orderVo.CourseWebVoOrder;
 import com.lmh.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,16 +55,16 @@ public class CourseFrontController {
         List<ChapterVo> chapterVideoList = chapterService.getChapterVideoByCourseId(courseId);
         return R.ok().data("courseWebVo",courseWebVo).data("chapterVideoList",chapterVideoList);
     }
-//
-//    //根据课程id查询课程信息
-//    @ApiOperation(value = " 根据课程id查询课程信息")
-//    @PostMapping("getCourseInfoOrder/{id}")
-//    public CourseWebVoOrder getCourseInfoOrder(@PathVariable String id) {
-//        CourseWebVo courseInfo = courseService.getBaseCourseInfo(id);
-//        CourseWebVoOrder courseWebVoOrder = new CourseWebVoOrder();
-//        BeanUtils.copyProperties(courseInfo,courseWebVoOrder);
-//        return courseWebVoOrder;
-//    }
+
+    //根据课程id查询课程信息
+    @ApiOperation(value = " 根据课程id查询课程信息")
+    @PostMapping("getCourseInfoOrder/{id}")
+    public CourseWebVoOrder getCourseInfoOrder(@PathVariable String id) {
+        CourseWebVo courseInfo = courseService.getBaseCourseInfo(id);
+        CourseWebVoOrder courseWebVoOrder = new CourseWebVoOrder();
+        BeanUtils.copyProperties(courseInfo,courseWebVoOrder);
+        return courseWebVoOrder;
+    }
 }
 
 

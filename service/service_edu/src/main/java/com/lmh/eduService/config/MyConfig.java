@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@MapperScan("com.lmh.eduService.mapper")
+@MapperScan("com.lmh.demo.mapper")
 public class MyConfig {
     /**
      * 乐观锁插件

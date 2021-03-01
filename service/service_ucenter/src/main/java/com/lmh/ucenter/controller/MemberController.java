@@ -1,6 +1,7 @@
 package com.lmh.ucenter.controller;
 
 
+import com.lmh.orderVo.UcenterMemberOrder;
 import com.lmh.ucenter.entity.Member;
 import com.lmh.ucenter.entity.vo.RegisterVo;
 import com.lmh.ucenter.service.MemberService;
@@ -8,6 +9,7 @@ import com.lmh.utils.JwtUtils;
 import com.lmh.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,6 +54,15 @@ public class MemberController {
     // 查询数据库，根据id获取用户信息
         Member member = memberService.getById(memberId);
         return R.ok().data("memberInfo",member);
+    }
+    //根据用户id获取用户信息
+    @ApiOperation(value = "根据用户id获取用户信息 课程评论用")
+    @PostMapping("getUserInfoOrder/{id}")
+    public UcenterMemberOrder getUserInfoOrder(@PathVariable String id) {
+        Member member = memberService.getById(id);
+        UcenterMemberOrder ucenterMemberOrder=new UcenterMemberOrder();
+        BeanUtils.copyProperties(member,ucenterMemberOrder);
+        return ucenterMemberOrder;
     }
 }
 

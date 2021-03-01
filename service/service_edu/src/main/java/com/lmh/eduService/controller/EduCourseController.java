@@ -9,9 +9,9 @@ import com.lmh.eduService.service.EduCourseService;
 import com.lmh.eduService.entity.vo.CourseInfoVo;
 import com.lmh.eduService.entity.vo.CourseQuery;
 import com.lmh.utils.R;
-import com.sun.xml.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +66,7 @@ public class EduCourseController {
     @PostMapping("findAll/{current}/{limit}")
     public R findAll(@PathVariable(name = "current")long current,
                      @PathVariable(name = "limit")long limit,
-                     @RequestBody(required = false)CourseQuery courseQuery){
+                     @RequestBody(required = false) CourseQuery courseQuery){
         String status = courseQuery.getStatus();
         String title = courseQuery.getTitle();
         String psychologistId = courseQuery.getPsychologistId();
@@ -106,6 +106,14 @@ public class EduCourseController {
     @DeleteMapping("deleteCourse/{id}")
     public R deleteCourse(@PathVariable String id){
         courseService.deleteCourse(id);
+        return R.ok();
+    }
+    @ApiOperation("根据课程id更改销售量")
+    @GetMapping("updateBuyCount/{id}")
+    public R updateBuyCountById(
+            @ApiParam(value = "课程id", required = true)
+            @PathVariable String id){
+        courseService.updateBuyCountById(id);
         return R.ok();
     }
 }
