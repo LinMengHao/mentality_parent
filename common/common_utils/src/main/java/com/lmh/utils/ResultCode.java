@@ -35,6 +35,7 @@ public enum ResultCode implements IResultCode {
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
     /*微信登录*/
     WX_ERROR(2010,"微信授权失败"),
+    WX_CREATE_ERROR(2011,"二维码支付码生成错误"),
     /*错误*/
     DORMITORY_NOT_DELETE(3007, "有入住人，不可删除，请先移除住户"),
     DORMITORY_ALREADY_EXIST(3008, "宿舍房间名已存在"),
