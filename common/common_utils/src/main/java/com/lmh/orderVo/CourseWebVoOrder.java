@@ -32,10 +32,10 @@ public class CourseWebVoOrder {
     private String description;
 
     @ApiModelProperty(value = "讲师ID")
-    private String teacherId;
+    private String psychologistId;
 
     @ApiModelProperty(value = "讲师姓名")
-    private String teacherName;
+    private String psychologistName;
 
     @ApiModelProperty(value = "讲师资历,一句话说明讲师")
     private String intro;

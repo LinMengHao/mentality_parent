@@ -1,5 +1,6 @@
 package com.lmh.order.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lmh.order.client.EduClient;
 import com.lmh.order.client.UcenterClient;
 import com.lmh.order.entity.TOrder;
@@ -11,6 +12,8 @@ import com.lmh.orderVo.CourseWebVoOrder;
 import com.lmh.orderVo.UcenterMemberOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -41,7 +44,7 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
         order.setCourseId(courseId); //课程id
         order.setCourseTitle(courseInfoOrder.getTitle());
         order.setCourseCover(courseInfoOrder.getCover());
-        order.setPsychologistName(courseInfoOrder.getTeacherName());
+        order.setPsychologistName(courseInfoOrder.getPsychologistName());
         order.setTotalFee(courseInfoOrder.getPrice());
         order.setMemberId(memberIdByJwtToken);
         order.setMobile(userInfoOrder.getMobile());
@@ -55,5 +58,34 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
 
         //返回订单号
         return order.getOrderNo();
+    }
+
+    @Override
+    public Boolean isBoughtCourseId(String courseId, String memberId) {
+        QueryWrapper<TOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("member_id", memberId)
+                .eq("course_id", courseId)
+                .eq("status", 1);
+        Integer count = baseMapper.selectCount(queryWrapper);
+        return count.intValue() > 0;
+    }
+
+    @Override
+    public List<TOrder> selectByMemberId(String memberId) {
+        QueryWrapper<TOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .orderByDesc("gmt_create")
+                .eq("member_id", memberId);
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public boolean removeById(String orderId, String memberId) {
+        QueryWrapper<TOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("id", orderId)
+                .eq("member_id", memberId);
+        return this.remove(queryWrapper);
     }
 }
