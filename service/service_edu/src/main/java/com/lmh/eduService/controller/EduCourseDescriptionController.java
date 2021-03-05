@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-01-26
  */
 @Api(tags = "课程描述")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduService/edu-course-description")
 public class EduCourseDescriptionController {

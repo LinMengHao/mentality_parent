@@ -5,7 +5,7 @@ import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "临时登录")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/adminService/user")
 public class EduLoginController {

@@ -19,7 +19,7 @@ import java.util.Map;
  * @since 2021-03-01
  */
 @Api(tags = "订单支付记录")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduOrder/t-pay-log")
 public class TPayLogController {

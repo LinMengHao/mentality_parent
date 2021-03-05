@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2021-02-23
  */
 @Api(tags = "用户登录注册")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/ucenter/member")
 public class MemberController {

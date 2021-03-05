@@ -23,7 +23,7 @@ import java.util.List;
  * @since 2020-12-30
  */
 
-@CrossOrigin
+//@CrossOrigin
 @Api(tags = "心理讲师")
 @RestController
 @RequestMapping("/eduService/edu-psychologist")

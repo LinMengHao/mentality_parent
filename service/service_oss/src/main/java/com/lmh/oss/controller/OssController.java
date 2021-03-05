@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @Api(tags = "阿里云Oss存储技术")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/ossService/fileOss")
 public class OssController {

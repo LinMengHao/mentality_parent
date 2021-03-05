@@ -23,7 +23,7 @@ import java.util.List;
  * @since 2021-03-01
  */
 @Api(tags = "支付订单")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduOrder/t-order")
 public class TOrderController {

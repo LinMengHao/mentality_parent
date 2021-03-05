@@ -23,7 +23,7 @@ import java.util.HashMap;
 @Api(tags = "微信登录")
 @Controller
 @RequestMapping("/api/ucenter/wx")
-@CrossOrigin
+//@CrossOrigin
 public class WxApiController {
     @Autowired
     private MemberService memberService;

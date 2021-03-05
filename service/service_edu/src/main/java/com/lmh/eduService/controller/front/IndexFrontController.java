@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @Api(tags = "前端页面展示")
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/eduService/indexFront")
 @RestController
 public class IndexFrontController {

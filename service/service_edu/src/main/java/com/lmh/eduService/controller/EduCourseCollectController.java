@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2021-03-04
  */
 @Api(tags = "课程收藏")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduService/edu-course-collect")
 public class EduCourseCollectController {

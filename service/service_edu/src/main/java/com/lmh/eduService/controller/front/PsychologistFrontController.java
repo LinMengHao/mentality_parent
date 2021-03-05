@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Api(tags = "前台讲师列表展示")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("eduService/psychologistFront")
 public class PsychologistFrontController {

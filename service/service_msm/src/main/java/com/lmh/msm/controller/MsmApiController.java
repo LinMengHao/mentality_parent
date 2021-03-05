@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 @Api(tags = "阿里云短信服务")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/eduMsm/msm")
 public class MsmApiController {
   @Autowired private MsmService msmService;

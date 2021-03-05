@@ -23,7 +23,7 @@ import java.util.Map;
 @Api(tags="前台课程页功能")
 @RestController
 @RequestMapping("/eduService/courseFront")
-@CrossOrigin
+//@CrossOrigin
 public class CourseFrontController {
 
     @Autowired

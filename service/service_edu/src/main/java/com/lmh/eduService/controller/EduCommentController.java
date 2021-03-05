@@ -31,7 +31,7 @@ import java.util.Map;
  * @since 2021-03-01
  */
 @Api(tags = "用户评功能")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduService/edu-comment")
 public class EduCommentController {

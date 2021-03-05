@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/cms/bannerAdmin")
-@CrossOrigin
+//@CrossOrigin
 public class BannerAdminController {
     @Autowired
     private CmsBannerService bannerAdminService;

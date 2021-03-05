@@ -15,7 +15,7 @@ import java.util.List;
 @Api(tags = "前端banner展示")
 @RestController
 @RequestMapping("/cms/bannerFront")
-@CrossOrigin
+//@CrossOrigin
 public class BannerFrontController {
     @Autowired
     private CmsBannerService bannerFrontService;
