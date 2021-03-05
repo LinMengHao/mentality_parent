@@ -19,7 +19,7 @@ public class EduLoginController {
     @GetMapping("info")
     public R info(){
         return R.ok().data("roles","[admin]")
-                .data("name","张雨濛")
+                .data("name","林")
                 .data("avatar","https://edu-manager-lmh.oss-cn-beijing.aliyuncs.com/2020/09/06/c1a80946c8c74932bbf2f54bdc8b3e04800041057.jpg");
     }
 }
