@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * 自定义userDetailsService - 认证用户详情
- * @author ZengJinming
+ * @author lmh
  * @since 2020-04-16
  */
 @Service("userDetailsService")

@@ -78,5 +78,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/api/**",
                 "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**"
                );
+//        web.ignoring().antMatchers("/*/**");
     }
 }

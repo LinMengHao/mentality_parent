@@ -140,10 +140,10 @@
             <version>4.12</version>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-        <!--        </dependency>-->
+<!--                <dependency>-->
+<!--                    <groupId>org.springframework.cloud</groupId>-->
+<!--                    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--                </dependency>-->
     </dependencies>
     <!--    解决maven不加载java包下的xml文件，该配置是的xml被包含加载-->
     <build>
